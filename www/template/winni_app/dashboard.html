@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    <style type="text/css">
+        .stripe_account_line{
+            margin: 10px;
+            border-bottom: 1px solid #c3c3c3;
+        }
+    </style>
+</head>
+<body>
+    <div class="stripe_account_list_area">
+        <div>测试店铺
+            <button class="stripe_account_list_load_btn" data-type="test">加载店铺</button>
+            <button class="stripe_account_list_create_btn" data-type="test">创建店铺</button>
+        </div>
+        <div class="stripe_account_list" data-type="test"></div>
+        <div>正式店铺
+            <button class="stripe_account_list_load_btn" data-type="online">加载店铺</button>
+            <button class="stripe_account_list_create_btn" data-type="test">创建店铺</button>
+        </div>
+        <div class="stripe_account_list" data-type="online"></div>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+</script>
+<script src="/static/js/winni_app/dashboard.js?v={{handler.version}}"></script>

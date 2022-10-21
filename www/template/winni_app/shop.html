@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ handler.title }} | Winni.App Shop</title>
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    <script src="/static/js/tools.js?v={{handler.version}}"></script>
+    <style>
+        .me_card{
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        .me_card_line_col{
+            display: flex;
+        }
+        .me_card_line_item{
+            flex: 1;
+            text-align: center;
+            text-align: -webkit-center;
+        }
+        .me_card_line_item_headimgurl{
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            overflow: hidden;
+            border:2px solid #3c447b;
+        }
+        .me_card_line_item_headimgurl>img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .get_chat_btn{
+            width: 50px;
+            height: 50px;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        .get_shops{
+            background-image: url(/static/img/winni_app/shops.png);
+        }
+
+
+        .cover_create {
+            position: fixed;
+            left: 0px;
+            top: 0px;
+            background: rgba(0,0,0,0.2);
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        .cover_create_card_store_headimgurl{
+            width: 100px;
+            height: 100px;
+            overflow: hidden;
+        }
+        .cover_create_card_store_headimgurl>img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+.one_shop_card{
+    border-bottom: 1px solid #ccc;
+    margin: 5px;
+    padding: 5px;
+    padding-left: 90px;
+    position: relative;
+    min-height: 80px;
+}
+.one_shop_card_headimgurl{
+    width: 80px;
+    height: 80px;
+    border-radius: 4px;
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    overflow: hidden;
+}
+.one_shop_card_headimgurl>img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.one_shop_card_entity{
+    font-size: 12px;
+    color: #999;
+}
+.one_shop_card_title{
+    font-size: 16px;
+    color: #333;   
+}
+.one_shop_card_desc{
+    font-size: 14px;
+    color: #666;
+}
+.one_shop_card_address{
+    font-size: 12px;
+    color: #999;
+    background: #f2f2f2;
+    border-radius: 4px;
+    padding: 2px 6px 2px 16px;  
+}
+
+
+
+
+        .hide{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="me_top"></div>
+    <div class="me_card">
+        <div class="me_card_line_row">
+            <div class="me_card_line_item">
+                <div class="me_card_line_item_shop_id">{{handler.shop_id}}</div>
+            </div>
+            <div class="me_card_line_item">
+                <div>MEDIAS</div>
+            </div>
+        </div>
+        {% if handler.is_editors %}
+        <div class="me_card_line_col">
+            <div class="me_card_line_item">
+                <div class="stripe_account_card"
+                    data-account-id="{{handler.stripe_account_id_online}}"
+                    data-pay-type="online">
+                    <div>Stripe Account Oline</div>
+                    <div>{{ handler.stripe_account_id_online }}</div>
+                    <div>
+                        <button class="stripe_account_login_btn">Login</button>
+                        <button class="stripe_account_retrieve_btn">Retrieve</button>
+                    </div>
+                    <div>
+                        payouts_enabled:{{ handler.stripe_account_id_online_payouts_enabled }}
+                    </div>
+                    <div class="log"></div>
+                </div>
+            </div>
+            <div class="me_card_line_item">
+                <div class="stripe_account_card"
+                    data-account-id="{{handler.stripe_account_id_test}}"
+                    data-pay-type="test">
+                    <div>Stripe Account Test</div>
+                    <div>{{ handler.stripe_account_id_test }}</div>
+                    <div>
+                        <button class="stripe_account_login_btn">Login</button>
+                        <button class="stripe_account_retrieve_btn">Retrieve</button>
+                    </div>
+                    <div>
+                        payouts_enabled:{{ handler.stripe_account_id_test_payouts_enabled }}
+                    </div>
+                    <div class="log"></div>
+                </div>
+            </div>
+        </div>
+        {% end if %}
+        <div class="me_card_line_col">
+            <div class="me_card_line_item">
+                <div class="get_chat_btn get_products" data-block="{{ handler.products_entity_id}}">
+                    products
+                </div>
+            </div>
+            <div class="me_card_line_item">
+                <a target="_blank" href="/home/msh/hollow/{{ handler.hollow_entity_id}}">
+                    <div class="get_chat_btn get_hollow" data-block="{{ handler.hollow_entity_id}}">
+                        hollow
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="me_card_line_row">
+            <div class="me_card_line_item">
+            </div>
+        </div>
+    </div>
+    <div class="me_results"></div>
+    <div class="hide">
+        <input id="img_add_upload_target" type="file" accept="image/*">
+    </div>
+<script type="text/javascript">
+    {% if handler.is_editors %}
+    var IS_EDITORS = true;
+    {% else %}
+    var IS_EDITORS = false;
+    {% end if %}
+    var USER_ID = "{{ handler.user_id }}";
+    var BLOCK_ID = "{{ handler.shop_id }}";
+    var SHOP_ID = "{{ handler.shop_id }}";
+    var STRIPE_ACCOUNT_ID_TEST = "{{ handler.stripe_account_id_test }}";
+    {% if handler.stripe_account_id_test_payouts_enabled %}
+    var STRIPE_ACCOUNT_ID_TEST_PAYOUTS_ENABLED = true;
+    {% else %}
+    var STRIPE_ACCOUNT_ID_TEST_PAYOUTS_ENABLED = false;
+    {% end if %}
+    var STRIPE_ACCOUNT_ID_ONLINE = "{{ handler.stripe_account_id_online }}";
+    {% if handler.stripe_account_id_online_payouts_enabled %}
+    var STRIPE_ACCOUNT_ID_ONLINE_PAYOUTS_ENABLED = true;
+    {% else %}
+    var STRIPE_ACCOUNT_ID_ONLINE_PAYOUTS_ENABLED = false;
+    {% end if %}
+</script>
+<script src="/static/js/page_image_target.js?v={{handler.version}}"></script>
+<script src="/static/js/winni_app/shop.js?v={{handler.version}}"></script>
+</body>
+</html>

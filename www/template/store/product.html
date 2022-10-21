@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if handler.title == "" %}
+    <title>User | Winni App</title>
+    {% else %}
+    <title>{{ handler.title }}</title>
+    {% end if %}
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests" />
+    <meta http-equiv="description" content="">
+    <meta name="referrer" content="no-referrer">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,300,400,500,700,900">
+    <link rel="shortcut icon" href="/static/favicon.ico?v={{handler.version}}">
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/js/tools.js?v={{handler.version}}"></script>
+    <script type="text/javascript" src="/static/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="/static/js/video.min.js"></script>
+    <script type="text/javascript" src="/static/js/videojs-contrib-hlsjs.min.js"></script>
+    <script type="text/javascript" src="/static/js/dist/web3.min.js"></script>
+    <script type="text/javascript" src="/static/js/jweixin-1.6.0.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.qrcode.min.js"></script>
+    <link rel="stylesheet" href="/static/css/video-js.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/page.css?v={{handler.version}}">
+    <!-- <link rel="stylesheet" type="text/css" href="/static/css/msh_hollow.css?v={{handler.version}}"> -->
+    <link rel="stylesheet" type="text/css" href="/static/css/store/product.css?v={{handler.version}}">
+    <style type="text/css">
+        .page_edit_tools{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .card{
+            position: absolute;
+            width: fit-content;
+        }
+        .current_now{
+            box-shadow: 0px 0px 0px 2px #03a9f4;
+        }
+        .dom>div>p{
+            min-height: 20px;
+        }
+        .main_area{
+            width: {{ int(handler.main_area.get('w','1024')) }}px;
+            height: {{ int(handler.main_area.get('h','0')) }}px;
+        }
+        .room_connect_num{
+            position: relative;
+        }
+        .span_num_icon{
+            position: absolute;
+            width: 14px;
+            height: 13px;
+            background-image: url(/static/img/msh_icon/people.png);
+            background-position: center center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            right: 40px;
+            top: 2px;
+        }
+
+        .store_user_card {
+    box-shadow: 0px 2px 8px rgb(0 0 0 / 20%);
+    margin: 10px 10px 20px 10px;
+    border-radius: 8px;
+}
+
+.store_user_card_line {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+img.store_user_info_user_headimgurl {
+    width: 60px;
+    height: 60px;
+    margin: 20px 0px 0px 0px;
+    border-radius: 50%;
+    border: 2px solid #3c447b;
+}
+.store_user_info_user_id {
+    font-size: 12px;
+    word-break: break-all;
+    background: #f2f2f2;
+    padding: 4px 8px;
+}
+.store_user_card_line_item{
+    min-width: 80px;
+    margin: 5px;
+    font-size: 14px;
+}
+
+
+
+.store_line_card {
+    box-shadow: 0px 2px 2px rgb(0 0 0 / 20%);
+    margin: 10px;
+    min-width: 300px;
+    width: -webkit-fill-available;
+    padding: 10px;
+    border-radius: 4px;
+    word-break: break-all;
+    min-height: 110px;
+}
+.store_line{
+    position: relative;
+}
+.store_line.store_span {
+    font-size: 12px;
+    color: #ccc;
+    width: 100%;
+    padding: 2px 0px;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+img.store_headimgurl {
+    position: absolute;
+    left: 0px;
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+}
+
+.store_title {
+    padding-left: 90px;
+    text-align: left;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+}
+.store_desc {
+    font-size: 14px;
+    padding-left: 90px;
+    text-align: left;
+    color: #999;
+}
+.store_user_info_store_list{
+    margin-bottom: 20px;
+}
+.store_user_info_store_btn{
+    width: 200px;
+    height: 44px;
+    color: white;
+    line-height: 44px;
+    background-color: #3c447b;
+    margin: 5px 0px 15px 0px;
+    border-radius: 2px;
+    cursor: pointer;
+}
+
+    </style>
+     <style type="text/css">
+.ground_goods_area {
+    display: flex;
+}
+.ground_goods_area_main{
+    width: 100%;
+}
+
+.ground_good_item {
+    margin: 5px 5px 10px 5px;
+    box-shadow: 0px 1px 2px rgb(0 0 0 / 20%);
+    border-radius: 2px;
+    overflow: hidden;
+}
+.ground_good_item_imgs {
+    width: 100%;
+}
+img.ground_good_item_img {
+    width: 100%;
+    height: 250px;
+    max-height: 300px;
+    object-fit: cover;
+}
+.ground_good_item_info_top{
+    position: relative;
+}
+.ground_good_item_store_id {
+    font-size: 12px;
+    padding: 5px;
+    width: 100px;
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    color: #999;
+}
+.ground_good_item_store_score {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    font-size: 12px;
+    color: #999;
+    line-height: 18px;
+    padding: 5px 5px 5px 14px;
+    background-image: url(/static/img/msh_icon/score.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 12px;
+    text-align: right;
+    height: 18px;
+}
+.ground_good_item_info{
+    padding: 5px 5px 10px 5px;
+}
+.good_info_name {
+    font-size: 16px;
+    font-weight: bold;
+}
+.good_info_price{
+    font-size: 14px;
+
+    padding-left: 20px;
+    background-image: url(/static/img/msh_icon/people3.png);
+    background-repeat: no-repeat;
+    background-size: 16px;
+    background-position: left center;
+}
+.good_info_price.line_through{
+    font-size: 12px;
+    color: #666;
+}
+.line_through{
+    text-decoration: line-through;    
+}
+
+.good_info_price[data-num="2"] {
+    padding-left: 20px;
+    background-image: url(/static/img/msh_icon/people2.png);
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: 2px center;
+}
+.good_info_price[data-num="1"] {
+    padding-left: 20px;
+    background-image: url(/static/img/msh_icon/people1.png);
+    background-repeat: no-repeat;
+    background-size: 12px;
+    background-position: 2px center;
+}
+.good_info_relative{
+    position: relative;
+    min-height: 20px;
+    margin-top: 5px;
+}
+.good_info_headimgurl{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
+.good_info_headimgurl_img{
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.good_info_title {
+    padding-left: 25px;
+    font-size: 12px;
+    line-height: 20px;
+    color: #999;
+    -webkit-line-clamp: 2;
+    max-height: 40px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.good_info_sell_num{
+
+}
+
+.prices_btns_area{
+    margin: 20px;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 10%);
+    padding: 10px;
+}
+.prices_btns_area>div>span{
+    padding: 2px 4px;
+    border-radius: 2px;
+    border: 1px solid black;
+}
+.prices_btn{
+    margin: 5px;
+    padding: 3px;
+    box-shadow: 0px 2px 4px rgb(0, 0, 0,0.1);
+    border-radius: 4px;
+}
+
+.sizes>span.current{
+    background-color: #3c447b;
+    color: white;
+}
+.colors>span.current{
+    background-color: #3c447b;
+    color: white;
+}
+</style>
+</head>
+<body>
+    <div class="msh_base_area">
+        <div class="msh_search_area">
+            <div class="msh_line_row hide">
+                <input class="msh_search_input" type="" name="">
+            </div>
+            <div class="msh_line_col msh_topic_list">
+                <div class="msh_line msh_topic_line">
+                    <div class="msh_line_card w_82_h_auto" align="center">
+                        <div class="msh_c_img_area onlinenum_0">
+                            <img class="msh_c_img" src="/static/img/msh_icon/logo.png?t={{handler.version}}">
+                        </div>
+                        <div class="msh_c_c_plus">
+                            <div class="msh_c_c_plus_icon"></div>
+                        </div>
+                        <div class="msh_c_title">Winni</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="msh_topic_title" style="
+                display: flex;
+                padding: 0px 15px;
+                align-items: center;
+            ">
+                <div style="background: #3c447b;width: 20px;height: 20px;border-radius: 20px;">
+                    <div class="msh_c_c_plus_icon"></div>
+                </div>
+                <div style="
+                    margin-left: 3px;
+                    font-size: 20px;
+                    font-weight: bold;
+                    color: #333;
+                ">{{ handler.title }}</div>
+            </div>
+            <div style="display: flex;padding: 0px 15px;align-items: center;font-size:12px;color:#999;">
+                <div class="room_connect_num"><span class="span_num">0</span><div class="span_num_icon"></div><span style="margin-left:20px;">Online</span></div>
+            </div>
+            <div style="display: flex;padding: 0px 15px;align-items: center;font-size:12px;color:#999;">
+                <div>{% raw handler.desc %}</div>
+            </div>
+        </div>
+        <div class="msh_main_area">
+        </div>
+        <div class="ground_goods_area">
+            <div class="ground_goods_area_main"></div>
+        </div>
+        
+    </div>
+    <div class="msh_menu_area" style="display: none;">
+        <div class="msh_line_col">
+            <div class="msh_line">
+                <div class="msh_line_card w_50_h_auto">
+                    <div class="msh_area_bottom_btn" align="center" data-action="home">
+                        <div class="msh_area_bottom_btn_content">
+                            <div class="msh_icon msh_icon_home"></div>
+                            <div class="msh_icon_text">Ground</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="msh_line hide">
+                <div class="msh_line_card w_50_h_auto show_add_comment_area">发布<br>瞬间</div>
+            </div>
+            <div class="msh_line">
+                <div class="msh_line_card w_50_h_auto">
+                    <div class="msh_area_bottom_btn" align="center" data-action="order">
+                        <div class="msh_area_bottom_btn_content">
+                            <div class="msh_icon msh_icon_order"></div>
+                            <div class="msh_icon_text">Order</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="msh_line">
+                <div class="msh_line_card w_50_h_auto">
+                    <div class="msh_area_bottom_btn" align="center" data-action="hollow">
+                        <div class="msh_area_bottom_btn_content">
+                            <div class="msh_icon msh_icon_hollow"></div>
+                            <div class="msh_icon_text">Discovery</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="msh_line">
+                <div class="msh_line_card w_50_h_auto">
+                    <div class="msh_area_bottom_btn btn_current" align="center" data-action="person">
+                        <div class="msh_area_bottom_btn_content">
+                            <div class="msh_icon msh_icon_person"></div>
+                            <div class="msh_icon_text">Me</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="msh_card dev_log hide"></div>
+    <div class="hide">
+        <input id="msh_hollow_img_add_upload" type="file" accept="image/*">
+        <input id="msh_hollow_video_add_upload" type="file" accept="video/*">
+    </div>
+</body>
+<script type="text/javascript">
+    var HOLLOWS = {% raw handler.hollows %};
+    var FINDMASTER_APP = "{{ handler.findmaster_app }}";
+    var WEBSOCKET_URL = "{{ handler.websocket_url }}";
+    var BLOCK_ID = "{{ handler.block_id }}";
+    var USER_ID = "{{ handler.user_id }}";
+    var IS_EDITOR = {{ 'true' if handler.user_id in handler.editors else 'false'}};
+    var PAGE_TYPE = "msh_hollow";
+    var IS_WEIXIN = {{ 'true' if handler.is_weixin else 'false' }};
+    {% if handler.is_weixin %}
+    var WX_DATA = {% raw handler.wx_data %};
+    var WX_APP = "{{ handler.wx_app }}";
+    var WX_APPID = '{{ handler.wx_appid }}';
+    var WX_TIMESTAMP = parseInt('{{ handler.wx_timestamp }}');
+    var WX_NONCESTR = '{{ handler.wx_noncestr }}';
+    var WX_SIGNATURE = '{{ handler.wx_signature }}';
+    {% else %}
+    var WX_DATA = {% raw handler.wx_data %};
+    {% end if %}
+    var HOST_URL = "{{ handler.host_url }}";
+
+    var CHAT_ID = "{{ handler.chat_id}}";
+    var COMMENT_ID= "{{ handler.comment_id}}";
+    var COMMENT_SEQUENCE= "{{ handler.comment_sequence}}";
+    var REMARK_ID = "{{ handler.remark_id}}";
+    var REF_ID = "{{ handler.ref_id}}";
+
+    var STORE_ID = "{{ handler.store_id }}";
+    var PRODUCT_ID = "{{ handler.block_id }}";
+</script>
+{% if handler.is_weixin %}
+<script type="text/javascript" src="/static/js/weixin.js?v={{handler.version}}"></script>
+{% end if %}
+<script type="text/javascript" src="/static/js/agora/AgoraRTC_N.js"></script>
+<script type="text/javascript" src="/static/js/agora/basicVideoCall.js"></script>
+<script type="text/javascript" src="/static/js/page.js?v={{handler.version}}"></script>
+<!-- <script type="text/javascript" src="/static/js/msh_hollow.js?v={{handler.version}}"></script>
+<script type="text/javascript" src="/static/js/msh_hollow_image.js?v={{handler.version}}"></script>
+<script type="text/javascript" src="/static/js/alipay.js?v={{handler.version}}"></script> -->
+<script type="text/javascript" src="/static/js/store/product.js?v={{handler.version}}"></script>
+</html>

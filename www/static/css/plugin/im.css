@@ -1,0 +1,26 @@
+.plugin_im_head{
+    position: fixed;
+    top: -30px;
+    left: -30px;
+    width: 60px;
+    height: 60px;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    box-shadow: 0px 1px 2px rgb(0 0 0 / 36%), 0px 2px 4px rgb(0 0 0 / 36%), 0px 1px 3px rgb(211 211 211 / 50%);
+    -webkit-box-shadow: 0px 1px 2px rgb(0 0 0 / 36%), 0px 2px 4px rgb(0 0 0 / 36%), 0px 1px 3px rgb(211 211 211 / 50%);
+    cursor: pointer;
+    -webkit-user-select: none;
+    user-select: none;
+    z-index: 2147483647;
+    transform: translate3d(0,0,0);
+}
+.plugin_im_logo{
+    background-image: url(/static/img/plugin/im/logo@2x.png);
+}
+
+.transition {
+  -webkit-transition: -webkit-transform 300ms;
+  transition: transform 300ms;
+}

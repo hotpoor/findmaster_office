@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>微信静默登录</title>
+    <style type="text/css">
+        body>div{
+            margin: 10px;
+        }
+    </style>
+</head>
+<body align="center">
+    <div style="font-size:16px;">
+        <div>正在跳转</div>
+        <div>...</div>
+    </div>
+    <div>
+        <div>目标地址</div>
+        <div id="aim_uri">{{ handler.aim_uri }}</div>
+    </div>
+    <div>
+        <div>微信openid</div>
+        <div id="openid">{{ handler.openid }}</div>
+    </div>
+
+</body>
+</html>
+<script type="text/javascript">
+    uri = document.getElementById("aim_uri").innerText
+    openid = document.getElementById("openid").innerText
+    if (uri.indexOf("?")<0){
+        new_uri = uri+"?help_wxapp={{handler.MPWeixinAppID}}&open_id="+openid
+    }else{
+        new_uri = uri+"&help_wxapp={{handler.MPWeixinAppID}}&open_id="+openid
+    }
+    if (uri=="None"){
+        alert("无目标跳转地址")
+    }else{
+        if (new_uri.indexOf("/api/tool/wechat/login_silence")==-1){
+            setTimeout(function(){
+                window.location.href = new_uri
+            },1000)
+        }else{
+            alert("限制访问目标链接")
+        }
+    }
+    
+</script>

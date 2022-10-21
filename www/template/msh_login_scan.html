@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% if handler.title == "" %}
+    <title>Page</title>
+    {% else %}
+    <title>{{ handler.title }}</title>
+    {% end if %}
+    <meta charset="utf-8">
+    <meta http-equiv="description" content="">
+    <meta name="referrer" content="no-referrer">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=0.25, user-scalable=yes" />
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Noto+Sans+SC:100,300,400,500,700,900">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    <script type="text/javascript" src="/static/js/tools.js?v={{handler.version}}"></script>
+    <script type="text/javascript" src="/static/js/clipboard.min.js"></script>
+    <script type="text/javascript" src="/static/js/video.min.js"></script>
+    <script type="text/javascript" src="/static/js/videojs-contrib-hlsjs.min.js"></script>
+    <script type="text/javascript" src="/static/js/dist/web3.min.js"></script>
+    <script type="text/javascript" src="/static/js/jweixin-1.6.0.js"></script>
+    <script type="text/javascript" src="/static/js/jquery.qrcode.min.js"></script>
+    <link rel="stylesheet" href="/static/css/video-js.css" />
+    <link rel="stylesheet" type="text/css" href="/static/css/page.css?v={{handler.version}}">
+    <style type="text/css">
+        .page_edit_tools{
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+        }
+        .card{
+            position: absolute;
+            width: fit-content;
+        }
+        .current_now{
+            box-shadow: 0px 0px 0px 2px #03a9f4;
+        }
+        .dom>div>p{
+            min-height: 20px;
+        }
+        .main_area{
+            width: {{ int(handler.main_area.get('w','1024')) }}px;
+            height: {{ int(handler.main_area.get('h','0')) }}px;
+        }
+    </style>
+    <style type="text/css">
+        .msh_card{
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.3);
+            border-radius: 6px;
+            word-break: break-all;
+        }
+        .dev_log{}
+        .msh_base_area{
+
+        }
+        .msh_line_col{
+            display: flex;
+            width: 100%;
+            overflow-x: auto;
+            overflow-y: hidden;
+            height: 220px;
+        }
+        .msh_line_row{
+            width: 100%;
+        }
+        .msh_line_base{
+
+        }
+        .msh_line_card.width_200{
+            width: 200px;
+            height: auto;
+            margin: 10px;
+            background: white;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .msh_line_card.width_fill{
+            width: -webkit-fill-available;
+            height: auto;
+            margin: 10px;
+            background: white;
+            /*box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);*/
+        }
+        .msh_line_card.width_per_25{
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 40px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .msh_top_cover_card{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999999;
+        }
+    </style>
+</head>
+<body>
+    <div class="msh_base_area">
+        <div class="msh_login_area">
+            <div class="msh_line_row">
+                <div class="msh_line">
+                    <div class="msh_line_card width_fill" align="center">
+                        <img    src="/static/img/logo/msh_logo.jpg"
+                                style="width: 120px;height: 120px;border-radius: 8px;">
+                    </div>
+                </div>
+                <div class="msh_line">
+                    <div class="msh_line_card width_fill" align="center">
+                        <button class="login_scan_submit">确认登录</button>
+                    </div>
+                    <div class="msh_line_card width_fill" align="center">
+                        <button class="login_scan_close">放弃登录</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    var FINDMASTER_APP = "{{ handler.findmaster_app }}";
+    var WEBSOCKET_URL = "{{ handler.websocket_url }}";
+    var BLOCK_ID = "{{ handler.block_id }}";
+    var USER_ID = "{{ handler.user_id }}";
+    var IS_EDITOR = {{ 'true' if handler.user_id in handler.editors else 'false'}};
+    var PAGE_TYPE = "msh_hollow";
+    var IS_WEIXIN = {{ 'true' if handler.is_weixin else 'false' }};
+    {% if handler.is_weixin %}
+    var WX_DATA = {% raw handler.wx_data %};
+    var WX_APP = "{{ handler.wx_app }}";
+    var WX_APPID = '{{ handler.wx_appid }}';
+    var WX_TIMESTAMP = parseInt('{{ handler.wx_timestamp }}');
+    var WX_NONCESTR = '{{ handler.wx_noncestr }}';
+    var WX_SIGNATURE = '{{ handler.wx_signature }}';
+    {% end if %}
+    var HOST_URL = "{{ handler.host_url }}";
+    var LOGIN_SCAN_ROOM_ID = "{{ handler.login_scan_room_id}}";
+    var LOGIN_SCAN_USER_ID = "{{ handler.login_scan_user_id}}";
+    var LOGIN_SCAN_UUID = "{{ handler.login_scan_uuid}}";
+</script>
+<script type="text/javascript" src="/static/js/agora/AgoraRTC_N.js"></script>
+<script type="text/javascript" src="/static/js/agora/basicVideoCall.js"></script>
+<script type="text/javascript" src="/static/js/page.js?v={{handler.version}}"></script>
+<script type="text/javascript" src="/static/js/msh_login_scan.js?v={{handler.version}}"></script>
+{% if handler.is_weixin %}
+<script type="text/javascript" src="/static/js/weixin.js?v={{handler.version}}"></script>
+{% end if %}
+<script type="text/javascript" src="/static/js/alipay.js?v={{handler.version}}"></script>
+</html>

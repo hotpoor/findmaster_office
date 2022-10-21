@@ -1,0 +1,106 @@
+{
+  "folder_name": "鉴定报告类",
+  "block_id": "64613845bdb841e999af347eca18c738",
+  "data": [
+    {
+      "name": "彭庄煤矿煤自燃倾向性检测报告.pdf",
+      "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/彭庄煤矿煤自燃倾向性检测报告.pdf",
+      "md5": "6fd319cb1e4a075236184ff06fe7d0b0",
+      "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_6fd319cb1e4a075236184ff06fe7d0b0",
+      "cdn_type": "public"
+    },
+    {
+      "name": "彭庄煤矿煤层最短自然发火期研究性报告.pdf",
+      "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/彭庄煤矿煤层最短自然发火期研究性报告.pdf",
+      "md5": "89af68ebdd1e31c0f9dee092365b0277",
+      "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_89af68ebdd1e31c0f9dee092365b0277",
+      "cdn_type": "public"
+    },
+    {
+      "name": "2021彭庄能力报告定稿(1).docx",
+      "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/2021彭庄能力报告定稿(1).docx",
+      "md5": "43f380a88dc8131eb5cb78b2c9c7fca6",
+      "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_43f380a88dc8131eb5cb78b2c9c7fca6",
+      "cdn_type": "public"
+    },
+    {
+      "name": "20210907105056通风阻力报告.pdf",
+      "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/20210907105056通风阻力报告.pdf",
+      "md5": "32f8bd7f5e16a5c9438223dbbca30d3f",
+      "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_32f8bd7f5e16a5c9438223dbbca30d3f",
+      "cdn_type": "public"
+    },
+    {
+      "name": "彭庄煤矿煤尘爆炸性检测报告.pdf",
+      "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/彭庄煤矿煤尘爆炸性检测报告.pdf",
+      "md5": "0258c247741c10dfaa86fce78d15f1c0",
+      "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_0258c247741c10dfaa86fce78d15f1c0",
+      "cdn_type": "public"
+    },
+    {
+      "name": "彭庄煤矿自然发火标志气体检测报告.pdf",
+      "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/彭庄煤矿自然发火标志气体检测报告.pdf",
+      "md5": "9117716ea370d40fe6093edf26e384e3",
+      "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_9117716ea370d40fe6093edf26e384e3",
+      "cdn_type": "public"
+    }
+  ],
+  "tree": [
+    {
+      "root": "upload_ready/鉴定报告类",
+      "dirs": [],
+      "files": [
+        "彭庄煤矿煤自燃倾向性检测报告.pdf",
+        "彭庄煤矿煤层最短自然发火期研究性报告.pdf",
+        "2021彭庄能力报告定稿(1).docx",
+        "20210907105056通风阻力报告.pdf",
+        "彭庄煤矿煤尘爆炸性检测报告.pdf",
+        "彭庄煤矿自然发火标志气体检测报告.pdf"
+      ],
+      "files_data": [
+        {
+          "name": "彭庄煤矿煤自燃倾向性检测报告.pdf",
+          "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/彭庄煤矿煤自燃倾向性检测报告.pdf",
+          "md5": "6fd319cb1e4a075236184ff06fe7d0b0",
+          "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_6fd319cb1e4a075236184ff06fe7d0b0",
+          "cdn_type": "public"
+        },
+        {
+          "name": "彭庄煤矿煤层最短自然发火期研究性报告.pdf",
+          "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/彭庄煤矿煤层最短自然发火期研究性报告.pdf",
+          "md5": "89af68ebdd1e31c0f9dee092365b0277",
+          "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_89af68ebdd1e31c0f9dee092365b0277",
+          "cdn_type": "public"
+        },
+        {
+          "name": "2021彭庄能力报告定稿(1).docx",
+          "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/2021彭庄能力报告定稿(1).docx",
+          "md5": "43f380a88dc8131eb5cb78b2c9c7fca6",
+          "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_43f380a88dc8131eb5cb78b2c9c7fca6",
+          "cdn_type": "public"
+        },
+        {
+          "name": "20210907105056通风阻力报告.pdf",
+          "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/20210907105056通风阻力报告.pdf",
+          "md5": "32f8bd7f5e16a5c9438223dbbca30d3f",
+          "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_32f8bd7f5e16a5c9438223dbbca30d3f",
+          "cdn_type": "public"
+        },
+        {
+          "name": "彭庄煤矿煤尘爆炸性检测报告.pdf",
+          "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/彭庄煤矿煤尘爆炸性检测报告.pdf",
+          "md5": "0258c247741c10dfaa86fce78d15f1c0",
+          "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_0258c247741c10dfaa86fce78d15f1c0",
+          "cdn_type": "public"
+        },
+        {
+          "name": "彭庄煤矿自然发火标志气体检测报告.pdf",
+          "path": "64613845bdb841e999af347eca18c738/upload_ready/鉴定报告类/彭庄煤矿自然发火标志气体检测报告.pdf",
+          "md5": "9117716ea370d40fe6093edf26e384e3",
+          "link": "http://office-cdn-1.xialiwei.com/64613845bdb841e999af347eca18c738_s_9117716ea370d40fe6093edf26e384e3",
+          "cdn_type": "public"
+        }
+      ]
+    }
+  ]
+}

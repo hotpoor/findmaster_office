@@ -1,0 +1,44 @@
+*{
+    padding: 0;
+    margin: 0;
+    outline: none;
+}
+html{
+    width: 100%;
+    height: 100%;
+}
+body{
+    width: 100%;
+    min-height: 100%;
+    font-family: "Noto Sans SC",sans-serif;
+}
+a:link{
+    text-decoration:none;
+}
+a:visited{
+    text-decoration:none;
+}
+a:hover{
+    text-decoration:none;
+}
+a:active{
+    text-decoration:none;
+}
+a{
+    text-decoration:none;
+}
+::-webkit-input-placeholder { /* Edge */
+  color: #c3c3c3;
+  font-size: 14px;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: #c3c3c3;
+  font-size: 14px;
+}
+
+::placeholder {
+  color: #c3c3c3;
+  font-size: 14px;
+}
+.hide{display: none;}

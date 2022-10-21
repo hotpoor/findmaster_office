@@ -1,0 +1,241 @@
+.msh_area_width{
+    max-width: 520px;
+}
+
+@media screen and (min-width: 961px) {
+    .msh_area_width{
+        max-width: 520px;
+        margin-left: calc(50% - 260px);
+    }
+}
+@media (max-width: 960px) and (min-width: 769px) {
+    .msh_area_width{
+        max-width: 520px;
+        margin-left: calc(50% - 260px);
+    }
+}
+@media (max-width:768px) and (min-width: 521px) {
+    .msh_area_width{
+        max-width: 520px;
+        margin-left: calc(50% - 260px);
+    }
+}
+@media (max-width:520px){
+    .msh_area_width{
+        max-width: 520px;
+        min-width: 320px;
+    }
+}
+
+.msh_area_normal{
+    width: 100%;
+    height: auto;
+    margin-left: 0px;
+    padding-bottom: 90px;
+}
+
+.msh_area_banner_imgs_area{
+    width: 100%;
+    height: 180px;
+}
+.msh_area_banner_imgs{
+    position: relative;
+    height: 180px;
+    overflow: hidden;
+}
+.msh_area_banner_img_area{
+    position: absolute;
+}
+.msh_area_banner_img{
+    width: 100%;
+    height: 180px;
+    background: #c3c3c3;
+    object-fit:cover;
+}
+
+
+
+.msh_area_page_style_popmarkt{
+    margin-top: 15px;
+}
+
+.msh_area_page_style_popmarkt_title{
+    display: flex;
+    transform: scale(0.7) translate(-80px,10px);
+}
+.msh_area_page_style_popmarkt_title_main{
+    margin-left: 20px;
+}
+.msh_area_page_style_popmarkt_title_main_base{
+    font-size: 26px;
+    font-weight: bold;
+    color: #823B43;
+}
+.msh_area_page_style_popmarkt_title_main_more{
+    font-size: 16px;
+    font-weight: bold;
+    color: #ffffff;
+    margin-top: -8px;
+}
+.msh_area_page_style_popmarkt_title_plus{
+    box-shadow: -20px 2px 0px -15px #823B43;
+    margin-left: 20px;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+.msh_area_page_style_popmarkt_title_plus_base{
+    font-size: 16px;
+    font-weight: bold;
+    color: #823B43;
+}
+.msh_area_page_style_popmarkt_title_plus_more{
+    color: #ffffff;
+    font-size: 12px;
+    margin-top: -5px;
+}
+
+.msh_area_page_style_popmarkt_goods_area{
+    width: 100%;
+    position: relative;
+}
+.msh_area_page_style_popmarkt_goods{
+    width: 100%;
+    justify-content: space-between;
+    white-space: nowrap;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+}
+.msh_area_page_style_popmarkt_good{
+    margin: 8px;
+}
+.msh_area_page_style_popmarkt_good_content{
+    width: 160px;
+    height: 200px;
+    overflow: hidden;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 16px;
+    background-color: white;
+}
+
+
+img.msh_area_page_style_popmarkt_good_img{
+    width: 100%;
+    object-fit: cover;
+    height: 140px;
+}
+.msh_area_page_style_popmarkt_good_title{
+    font-size: 14px;
+    margin-left: 10px;
+    margin-top: 5px;
+    color: #333;
+    font-weight: bold;
+}
+.msh_area_page_style_popmarkt_good_desc{
+    font-size: 12px;
+    flex: 1;
+    color: #999;
+    margin-left: 10px;
+    font-weight: bold;
+}
+.msh_area_page_style_popmarkt_good_price_info{
+    font-size: 30px;
+    font-weight: bold;
+    color: #ff9800;
+    text-align: right;
+    flex: 1;
+    margin-right: -10px;
+    margin-top: -20px;
+    transform: scale(0.6);
+}
+.msh_area_page_style_popmarkt_good_price_info.only{
+    text-align: left;
+    margin-left: -32px;
+    margin-top: -10px;
+    font-size: 26px;
+}
+.msh_area_page_style_popmarkt_good_price_info>span{
+    font-size: 12px;
+}
+.msh_area_page_style_popmarkt_good_info{
+    display: flex;
+}
+
+
+.msh_area_pages{
+    display: flex;
+    flex-wrap: wrap;
+}
+.msh_area_page_btn{
+    width: 46%;
+    box-shadow: 0px 3px 9px rgb(0 0 0 / 20%);
+    border-radius: 16px;
+    margin: 15px 2%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    font-size: 40px;
+}
+
+.msh_area_bottom_fixed{
+    position: fixed;
+    z-index: 999999;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+}
+.msh_area_bottom_btns{
+    width: 100%;
+    height: 60px;
+    background-color: white;
+    color: #999;
+    display: flex;
+    flex-wrap: nowrap;
+    border-top: 1px solid #f2f2f2;
+    font-size: 14px;
+}
+.msh_area_bottom_btn{
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    color: #ccc;
+}
+.msh_area_bottom_btn.btn_current{
+    color: #3c447b;
+}
+.msh_area_bottom_btn.btn_current>.msh_area_bottom_btn_content>.msh_icon{
+    background-color: #3c447b;
+}
+.msh_icon{
+    background-color: #ccc;
+    -webkit-mask-size: 22px 22px;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center center;
+    mask-size: 22px 22px;
+    mask-repeat: no-repeat;
+    mask-position: center center;
+    width: 30px;
+    height: 30px;
+    margin-left: 0px;
+}
+.msh_icon.msh_icon_home{
+    -webkit-mask-image: url(/static/img/msh_icon/home_2.png);
+    mask-image: url(/static/img/msh_icon/home_2.png);
+}
+.msh_icon.msh_icon_person{
+    -webkit-mask-image: url(/static/img/msh_icon/person_2.png);
+    mask-image: url(/static/img/msh_icon/person_2.png);
+}
+.msh_icon.msh_icon_giftclub{
+    -webkit-mask-image: url(/static/img/msh_icon/giftclub_1.png);
+    mask-image: url(/static/img/msh_icon/giftclub_1.png);
+}
+.msh_icon.msh_icon_story{
+    -webkit-mask-image: url(/static/img/msh_icon/story_2.png);
+    mask-image: url(/static/img/msh_icon/story_2.png);
+}

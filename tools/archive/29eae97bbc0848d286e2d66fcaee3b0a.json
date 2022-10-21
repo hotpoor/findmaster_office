@@ -1,0 +1,106 @@
+{
+  "folder_name": "通风类",
+  "block_id": "29eae97bbc0848d286e2d66fcaee3b0a",
+  "data": [
+    {
+      "name": "通风报表9.24.xls",
+      "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/通风报表9.24.xls",
+      "md5": "a110082758de31d5ab4a823ddb6e2230",
+      "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_a110082758de31d5ab4a823ddb6e2230",
+      "cdn_type": "public"
+    },
+    {
+      "name": "通风报表9.5.xls",
+      "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/通风报表9.5.xls",
+      "md5": "a858bceba7b06f4123cf1d5e4e9410a9",
+      "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_a858bceba7b06f4123cf1d5e4e9410a9",
+      "cdn_type": "public"
+    },
+    {
+      "name": "九月份月“一通三防”报表.xls",
+      "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/九月份月“一通三防”报表.xls",
+      "md5": "b57a6e26f3fe29ac860b413724cabd23",
+      "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_b57a6e26f3fe29ac860b413724cabd23",
+      "cdn_type": "public"
+    },
+    {
+      "name": "需风量分配表9月份  .xls",
+      "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/需风量分配表9月份  .xls",
+      "md5": "8d3e5fdac52f24b71fa997f79c2003e4",
+      "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_8d3e5fdac52f24b71fa997f79c2003e4",
+      "cdn_type": "public"
+    },
+    {
+      "name": "2022年9月配风计划  .doc",
+      "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/2022年9月配风计划  .doc",
+      "md5": "5f0108bb8371883d401c9a34164add4b",
+      "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_5f0108bb8371883d401c9a34164add4b",
+      "cdn_type": "public"
+    },
+    {
+      "name": "通风报表9.14.xls",
+      "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/通风报表9.14.xls",
+      "md5": "5d214363c3de33f800f37d2b7f8f9081",
+      "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_5d214363c3de33f800f37d2b7f8f9081",
+      "cdn_type": "public"
+    }
+  ],
+  "tree": [
+    {
+      "root": "upload_ready/通风类",
+      "dirs": [],
+      "files": [
+        "通风报表9.24.xls",
+        "通风报表9.5.xls",
+        "九月份月“一通三防”报表.xls",
+        "需风量分配表9月份  .xls",
+        "2022年9月配风计划  .doc",
+        "通风报表9.14.xls"
+      ],
+      "files_data": [
+        {
+          "name": "通风报表9.24.xls",
+          "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/通风报表9.24.xls",
+          "md5": "a110082758de31d5ab4a823ddb6e2230",
+          "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_a110082758de31d5ab4a823ddb6e2230",
+          "cdn_type": "public"
+        },
+        {
+          "name": "通风报表9.5.xls",
+          "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/通风报表9.5.xls",
+          "md5": "a858bceba7b06f4123cf1d5e4e9410a9",
+          "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_a858bceba7b06f4123cf1d5e4e9410a9",
+          "cdn_type": "public"
+        },
+        {
+          "name": "九月份月“一通三防”报表.xls",
+          "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/九月份月“一通三防”报表.xls",
+          "md5": "b57a6e26f3fe29ac860b413724cabd23",
+          "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_b57a6e26f3fe29ac860b413724cabd23",
+          "cdn_type": "public"
+        },
+        {
+          "name": "需风量分配表9月份  .xls",
+          "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/需风量分配表9月份  .xls",
+          "md5": "8d3e5fdac52f24b71fa997f79c2003e4",
+          "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_8d3e5fdac52f24b71fa997f79c2003e4",
+          "cdn_type": "public"
+        },
+        {
+          "name": "2022年9月配风计划  .doc",
+          "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/2022年9月配风计划  .doc",
+          "md5": "5f0108bb8371883d401c9a34164add4b",
+          "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_5f0108bb8371883d401c9a34164add4b",
+          "cdn_type": "public"
+        },
+        {
+          "name": "通风报表9.14.xls",
+          "path": "29eae97bbc0848d286e2d66fcaee3b0a/upload_ready/通风类/通风报表9.14.xls",
+          "md5": "5d214363c3de33f800f37d2b7f8f9081",
+          "link": "http://office-cdn-1.xialiwei.com/29eae97bbc0848d286e2d66fcaee3b0a_s_5d214363c3de33f800f37d2b7f8f9081",
+          "cdn_type": "public"
+        }
+      ]
+    }
+  ]
+}

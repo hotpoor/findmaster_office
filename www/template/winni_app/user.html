@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Me</title>
+    <script type="text/javascript" src="/static/js/jquery-1.12.4.min.js"></script>
+    <style>
+        .me_card{
+            margin: 10px;
+            padding: 10px;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 4px;
+        }
+        .me_card_line_col{
+            display: flex;
+        }
+        .me_card_line_item{
+            flex: 1;
+            text-align: center;
+            text-align: -webkit-center;
+        }
+        .me_card_line_item_headimgurl{
+            width: 60px;
+            height: 60px;
+            border-radius: 30px;
+            overflow: hidden;
+            border:2px solid #3c447b;
+        }
+        .me_card_line_item_headimgurl>img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .get_chat_btn{
+            width: 50px;
+            height: 50px;
+            background-size: 50% 50%;
+            background-repeat: no-repeat;
+            background-position: center center;
+        }
+        .get_orders{
+            background-image: url(/static/img/winni_app/orders.png);
+        }
+        .get_collections{
+            background-image: url(/static/img/winni_app/collections.png);
+        }
+        .get_likes{
+            background-image: url(/static/img/winni_app/likes.png);
+        }
+    </style>
+</head>
+<body>
+    <div class="me_top"></div>
+    <div class="me_card">
+        <div class="me_card_line_row">
+            <div class="me_card_line_item">
+                <div class="me_card_line_item_headimgurl">
+                    <img src="{{ handler.user.get('headimgurl','/static/img/headimgurl.png')}}">
+                </div>
+            </div>
+            <div class="me_card_line_item">
+                <div>{{ handler.user.get('name','unset name')}}</div>
+            </div>
+            <div class="me_card_line_item">
+                <div>{{ handler.user.get('email','unset email')}}</div>
+            </div>
+            <div class="me_card_line_item">
+                <div>{{ handler.user_id }}</div>
+            </div>
+        </div>
+        <div class="me_card_line_col">
+            <div class="me_card_line_item">
+                <div class="get_chat_btn get_orders" data-block="{{ handler.orders_entity_id}}"></div>
+            </div>
+            <div class="me_card_line_item">
+                <div class="get_chat_btn get_collections" data-block="{{ handler.collections_entity_id}}"></div>
+            </div>
+            <div class="me_card_line_item">
+                <div class="get_chat_btn get_likes" data-block="{{ handler.likes_entity_id}}"></div>
+            </div>
+        </div>
+    </div>
+    <div class="me_results"></div>
+
+<script type="text/javascript">
+    var USER_ID = "{{ handler.user_id }}";
+</script>
+<script src="/static/js/winni_app/user.js?v={{handler.version}}"></script>
+</body>
+</html>

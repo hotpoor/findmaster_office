@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="500px" height="400px" viewBox="0 0 500 400" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 57.1 (83088) - https://sketch.com -->
+    <title>编组</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <filter x="-7.2%" y="-9.4%" width="114.3%" height="121.2%" filterUnits="objectBoundingBox" id="filter-1">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <text id="text-2" font-family="PingFangSC-Semibold, PingFang SC" font-size="80" font-weight="500" fill="#FFFFFF">
+            <tspan x="0" y="270">点击分享</tspan>
+        </text>
+        <filter x="-4.4%" y="-8.9%" width="108.8%" height="125.0%" filterUnits="objectBoundingBox" id="filter-3">
+            <feOffset dx="0" dy="4" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="4" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="分享页面" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="编组" filter="url(#filter-1)" transform="translate(36.000000, 38.000000)">
+            <path id="直线" d="M426.160435,12.9843245 C427.442326,12.3075959 429.0301,12.7981765 429.706829,14.0800669 C429.971953,14.5822768 430.067037,15.1569304 429.97781,15.7177727 L429.97781,15.7177727 L423.170823,58.5036406 C422.943071,59.9351901 421.597942,60.9110612 420.166393,60.6833099 C419.76399,60.6192899 419.382019,60.4624592 419.050729,60.2252378 L419.050729,60.2252378 L406.55,51.274 L405.070004,53.3413861 C403.825354,55.0795925 401.445123,55.5228632 399.664983,54.3840072 L399.489033,54.2648372 C397.692887,52.9786985 397.279443,50.4800127 398.565582,48.6838661 L398.565582,48.6838661 L400.045,46.616 L387.54483,37.6653005 C386.415373,36.8565483 386.119163,35.3170896 386.8392,34.1529095 L386.938896,34.003279 C387.176118,33.6719895 387.487214,33.4004809 387.847548,33.2102552 L387.847548,33.2102552 Z" fill="#FFFFFF" fill-rule="nonzero"></path>
+            <path d="M180.171199,84.3292658 C280.153504,56.4812518 335.045565,64.1171786 344.847381,107.237046 C359.550107,171.916847 233.643969,134.523971 258.534654,108.463449 C275.128444,91.0897678 328.883297,90.1852641 419.799212,105.749938" id="路径" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" transform="translate(299.985206, 105.535881) rotate(-219.000000) translate(-299.985206, -105.535881) "></path>
+            <g id="点击分享" fill="#FFFFFF" fill-opacity="1">
+                <use filter="url(#filter-3)" xlink:href="#text-2"></use>
+                <use xlink:href="#text-2"></use>
+            </g>
+        </g>
+    </g>
+</svg>
