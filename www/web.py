@@ -69,6 +69,7 @@ application = tornado.web.Application([
 
     (r"/api/pages/list",findmaster.PagesListAPIHandler),
 
+    (r"/api/page/add_free_pdf",findmaster.PageAddFreePdfAPIHandler),
     (r"/api/page/add_free_docx",findmaster.PageAddFreeDocxAPIHandler),
     (r"/api/page/add_free",findmaster.PageAddFreeAPIHandler),
     (r"/api/page/add_dom",findmaster.PageAddDomAPIHandler),
@@ -266,6 +267,8 @@ application = tornado.web.Application([
 
     # (r"/start",auth.StartHomeHandler),
 
+    (r"/api/search/add_free_page", findmaster_search.SearchAddFreePageAPIHandler),
+    (r"/api/search/add_free", findmaster_search.SearchAddFreeAPIHandler),
     (r"/api/search/add", findmaster_search.SearchAddAPIHandler),
     (r"/api/search/list", findmaster_search.SearchListAPIHandler),
     (r"/api/search/list_more", findmaster_search.SearchListMoreAPIHandler),

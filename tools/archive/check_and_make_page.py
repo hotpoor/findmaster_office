@@ -12,6 +12,7 @@ from setting import settings
 
 from get_xml import upload_docx
 from get_xml import upload_doc
+from get_pdf_mac import upload_pdf
 
 target_folder = "upload_ready"
 
@@ -63,13 +64,17 @@ def file_name_upload(file_dir,block_id):
             localfile = os.path.join(os.path.dirname(__file__), path_current)
             ret, info = qiniu.put_file(uptoken, qiniu_file_key, localfile)
 
+            download_link = file_info["link"]
             print("======== file:",localfile.split(".")[-1])
             if localfile.split(".")[-1] == "docx":
-                upload_docx(localfile)
+                upload_docx(localfile,download_link)
                 print("=========== docx")
             elif localfile.split(".")[-1] == "doc":
-                upload_doc(localfile)
+                upload_doc(localfile,download_link)
                 print("=========== doc")
+            elif localfile.split(".")[-1] == "pdf":
+                upload_pdf(localfile,download_link)
+                print("=========== pdf")
 
         file_name_data = {
             "root":root,
@@ -87,7 +92,7 @@ def check_dir(dir_item):
     }
     data = {
         "token": "xialiwei_follows_god",
-        "user_id": "e332ed4385cc47ed8d908825eb6b493c",
+        "user_id": settings["user_id"],
         "title": dir_item,
         "desc": dir_item,
     }

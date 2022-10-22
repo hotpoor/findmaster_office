@@ -89,7 +89,7 @@ settings = {
     "version":version_num,
     "base_ca_tax_id":"",
     "base_ca_company":"",
-    "search_type":["title","desc","tags","doms","product_title","product_desc"],
+    "search_type":["title","desc","tags","doms","product_title","product_desc","sequence"],
     "search_no_str":" !\"#$%&\'()*+,-./:;<=>?@[\\]^_`{|}~！？｡＂＃＄％＆＇（）＊＋，－／：；＜＝＞＠［＼］＾＿｀｛｜｝～｟｠｢｣､、〃》「」『』【】〔〕〖〗〘〙〚〛〜〝〞〟〰〾〿–—‘'‛“”„‟…‧﹏.",
 }
 

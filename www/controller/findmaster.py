@@ -419,6 +419,80 @@ class PageAddAPIHandler(WebRequest):
         user["pages"]=pages
         update_aim(user_id,user)
         self.finish({"info":"ok","about":"create new page success","block_id":block_id})
+class PageAddFreePdfAPIHandler(WebRequest):
+    def post(self):
+        token = self.get_argument("token","")
+        if token not in ["xialiwei_follows_god"]:
+            self.finish({"info":"error","about":"no login"})
+            return
+        user_id = self.get_argument("user_id","")
+        title = self.get_argument("title","new page")
+        desc = self.get_argument("desc","this is a new page")
+        free_doc_xml1 = self.get_argument("xml1","{}")
+        free_doc_xml1_json = json_decode(free_doc_xml1)
+        free_doc_xml2 = self.get_argument("xml2","{}")
+        free_doc_xml2_json = json_decode(free_doc_xml2)
+
+        pre_p_list = self.get_argument("pre_p_list","[]")
+        pre_p_list_json = json_decode(pre_p_list)
+
+        doms = []
+        for pre_p_item in pre_p_list_json:
+            dom_sequence = "".join(random.choice(string.ascii_lowercase+string.digits) for _ in range(6))
+            dom_sequence_same = False
+            while True:
+                for dom_item in doms:
+                    if dom_item[0] == dom_sequence:
+                        dom_sequence_same = True
+                        break
+                if dom_sequence_same:
+                    dom_sequence = "".join(random.choice(string.ascii_lowercase+string.digits) for _ in range(6))
+                    dom_sequence_same = False
+                else:
+                    break
+            dom_position = {
+                "x":10,
+                "y":10,
+                "w":100,
+                "h":40,
+                "z":0,
+                "s":"",
+                "r":"dom_scroll_relative"
+            }
+            dom_type="text"
+            dom_css = ""
+            # dom_content = """<div class="section" style="text-align: left;"><div>%s</div></div>"""%(pre_p_item)
+            pre_p_item_list = pre_p_item.split("\n")
+            pre_p_item_html = "<br>".join(pre_p_item_list)
+            dom_content = """<div class="section" style="text-align: left;"><div>%s</div></div>"""%(pre_p_item_html)
+            dom_children = []
+            updatetime = int(time.time())
+            dom = [dom_sequence,dom_type,dom_position,dom_content,dom_css,dom_children,updatetime]
+            doms.append(dom)
+
+        user = get_aim(user_id)
+        pages = user.get("pages",[])
+        block = {
+            "owner":user_id,
+            "subtype":"page",
+            "title":title,
+            "desc":desc,
+            "doms":doms,
+            "history":[],
+            "updatetime":int(time.time()),
+            "subtype_plus":"pdf",
+            "subtype_plus_info":{
+                # "xml1":free_doc_xml1_json,
+                # "xml2":free_doc_xml2_json,
+                "pre_p_list":pre_p_list_json,
+            },
+            "permission": "publish",
+        }
+        [block_id,block]=nomagic.block.create_block(block)
+        pages.insert(0,block_id)
+        user["pages"]=pages
+        update_aim(user_id,user)
+        self.finish({"info":"ok","about":"create new page success","block_id":block_id})
 class PageAddFreeDocxAPIHandler(WebRequest):
     def post(self):
         token = self.get_argument("token","")
@@ -461,7 +535,9 @@ class PageAddFreeDocxAPIHandler(WebRequest):
             }
             dom_type="text"
             dom_css = ""
-            dom_content = """<div class="section" style="text-align: left;"><div>%s</div></div>"""%(pre_p_item)
+            pre_p_item_list = pre_p_item.split("\n")
+            pre_p_item_html = "<br>".join(pre_p_item_list)
+            dom_content = """<div class="section" style="text-align: left;"><div>%s</div></div>"""%(pre_p_item_html)
             dom_children = []
             updatetime = int(time.time())
             dom = [dom_sequence,dom_type,dom_position,dom_content,dom_css,dom_children,updatetime]
@@ -483,6 +559,7 @@ class PageAddFreeDocxAPIHandler(WebRequest):
                 # "xml2":free_doc_xml2_json,
                 "pre_p_list":pre_p_list_json,
             },
+            "permission": "publish",
         }
         [block_id,block]=nomagic.block.create_block(block)
         pages.insert(0,block_id)
@@ -508,7 +585,8 @@ class PageAddFreeAPIHandler(WebRequest):
             "desc":desc,
             "doms":[],
             "history":[],
-            "updatetime":int(time.time())
+            "updatetime":int(time.time()),
+            "permission": "publish",
         }
         [block_id,block]=nomagic.block.create_block(block)
         pages.insert(0,block_id)

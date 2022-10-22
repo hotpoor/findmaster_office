@@ -13,6 +13,8 @@ import jieba
 import os
 import subprocess
 
+from setting import settings
+
 from xml.dom.minidom import parseString
 
 # file=docx.Document("template.docx")
@@ -45,7 +47,7 @@ def postprocessor1(path, key, value):
     }
     sub +=1
     return key, value
-def upload_docx(filename):
+def upload_docx(filename,download_link=""):
     sub = 0
     if filename.split(".")[-1] in ["docx"]:
         file=docx.Document(filename)
@@ -70,7 +72,10 @@ def upload_docx(filename):
         # with open("xml2.json", "w", encoding="utf-8") as bfile:
         #     bfile.write(json.dumps(json_conversion2, indent=2, ensure_ascii=False)) #ensure_ascii=False可以消除json包含中文的乱码问题
 
-        p_list = []
+        p_list = [
+            "文件名: %s"%filename,
+            "下载地址: %s"%download_link
+        ]
         doc_dd_0 = json.loads(json_conversion1)
         for k,v in doc_dd_0.items():
             is_number = False
@@ -110,7 +115,7 @@ def upload_docx(filename):
         }
         data = {
             "token": "xialiwei_follows_god",
-            "user_id": "e332ed4385cc47ed8d908825eb6b493c",
+            "user_id": settings["user_id"],
             "title": filename,
             "desc": filename,
             "xml1":json_conversion1,
@@ -122,14 +127,30 @@ def upload_docx(filename):
         block_id = request_json["block_id"]
         print(block_id)
 
-def upload_doc(filename):
+        url = "https://office.xialiwei.com/api/search/add_free_page"
+        header = {
+            'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
+        }
+        data = {
+            "token": "xialiwei_follows_god",
+            "user_id": settings["user_id"],
+            "search":"add free page default",
+            "type":"sequence",
+            "block_id":block_id,
+            "block_id_sequence":"add free page default",
+            "search":"add free page",
+        }
+        request = requests.post(url, headers=header, data=data)
+        request_json = json.loads(request.text)
+
+def upload_doc(filename,download_link=""):
     dest = "./dest"
     file = filename
-    output = subprocess.check_output(["/Applications/LibreOffice.app/Contents/MacOS/soffice","--headless","--convert-to","docx",file,"--outdir",dest])
+    output = subprocess.check_output([settings["libreoffice"],"--headless","--convert-to","docx",file,"--outdir",dest])
     print(output)
     dest_file = "./dest/%sx"%(file.split("/")[-1])
     print(dest_file)
-    upload_docx(dest_file)
+    upload_docx(dest_file,download_link)
 # print("=====")
 
 # a = parseString(body_xml_str)

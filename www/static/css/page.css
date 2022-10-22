@@ -208,6 +208,13 @@ a{
 .dom_img>.card_font_color{
     display: block;
 }
+.dom_iframe>.card_font_size,
+.dom_iframe>.card_text_align,
+.dom_iframe>.card_scroll_relative,
+.dom_iframe>.card_scroll_auto,
+.dom_iframe>.card_font_color{
+    display: block;
+}
 .card_font_size{
     display: none;
     opacity: 0.5;
@@ -507,6 +514,7 @@ a{
 .card.dom_scroll_relative>.sections{
     width: 100%;
     height: 100%;
+    word-break: break-word;
 }
 .card.dom_img.dom_scroll_relative>.sections{
     width: 100%;

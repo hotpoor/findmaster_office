@@ -1,10 +1,25 @@
-from pdfminer.pdfparser import PDFParser, PDFDocument
-from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
-from pdfminer.converter import PDFPageAggregator
-from pdfminer.layout import LTTextBoxHorizontal, LAParams,LTTextBox,LTFigure,LTImage,LTTextLine,LTChar,LTPage
-from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
+# import pdfminer
+# from pdfminer.pdfparser import PDFParser
+# from pdfminer.pdfdocument import PDFDocument
+# from pdfminer.pdfpage import PDFPage
 
-pdf_path = 'test2.pdf'
+# from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+# from pdfminer.converter import PDFPageAggregator
+# from pdfminer.layout import LTTextBoxHorizontal, LAParams,LTTextBox,LTFigure,LTImage,LTTextLine,LTChar,LTPage
+# from pdfminer.pdfinterp import PDFTextExtractionNotAllowed
+
+from pdfminer.pdfparser import PDFParser
+from pdfminer.pdfdocument import PDFDocument
+from pdfminer.pdfpage import PDFPage
+from pdfminer.pdfpage import PDFTextExtractionNotAllowed
+from pdfminer.pdfinterp import PDFResourceManager
+from pdfminer.pdfinterp import PDFPageInterpreter
+from pdfminer.pdfdevice import PDFDevice
+from pdfminer.layout import *
+from pdfminer.converter import PDFPageAggregator
+
+
+pdf_path = '彭庄煤矿煤自燃倾向性检测报告.pdf'
 result_list = []
 
 def parse_pdf():
@@ -12,7 +27,7 @@ def parse_pdf():
     # 用文件对象创建一个PDF文档分析器
     parser = PDFParser(fp)
     # 创建一个PDF文档
-    doc = PDFDocument()
+    doc = PDFDocument(parser)
     # 连接分析器，与文档对象
     parser.set_document(doc)
     doc.set_parser(parser)
