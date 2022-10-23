@@ -591,6 +591,7 @@ class SearchListAPIHandler(WebRequest):
             result_type = result_search_body.get("type","block")
             result_subytpe = result_search_body.get("subtype","block")
             result_doms = result_search_body.get("doms",[])
+            result_permission = result_search_body.get("permission","private")
             if result_type in ["user"]:
                 result_title = result_search_body.get("name","暂无昵称")
                 result_desc = result_search_body.get("plus_info",{}).get("角色","")
@@ -607,6 +608,129 @@ class SearchListAPIHandler(WebRequest):
                 "type":result_type,
                 "subtype":result_subytpe,
                 "sequence":sequence_list,
+                "permission":result_permission,
+            }
+        self.finish({
+            "info":"ok",
+            "about":"success",
+            "result":result_json,
+            "result_search_ids":list(result_search_ids),
+            "result_search_json":result_search_json,
+            "result_search_ids_count":result_search_ids_count,
+            })
+class SearchListForceAPIHandler(WebRequest):
+    @tornado.gen.coroutine
+    def get(self):
+        search_content= self.get_argument("search",None)
+        search_type = self.get_argument("type",None)
+        if not search_content:
+            self.finish({"info":"error","about":"no content"})
+            return
+        search_content_list_no = settings["search_no_str"]
+        search_content_list_no = set(list(search_content_list_no))
+        search_content_list = set(jieba.lcut(search_content))
+        search_content_list = tuple(search_content_list-search_content_list_no)
+        result = conn.query("SELECT * FROM index_search WHERE word in %s",search_content_list)
+        result_json = {}
+        result_has = []
+        word_ids = []
+        for item in result:
+            item_word = item.get("word",None)
+            item_entity_id = item.get("entity_id",None)
+            word_ids.append(item_entity_id)
+            result_has.append(item_word)
+        search_blocks = get_aims(word_ids)
+        result_search_ids = set([])
+        result_search_ids_count = {}
+        result_search_ids_list = []
+        for search_block in search_blocks:
+            result_search_ids_list_item = set()
+            search_block_id = search_block[0]
+            search_block_body = search_block[1]
+            search_block_word = search_block_body.get("word",None)
+            search_block_search_data = search_block_body.get("search_data",{})
+            if not search_block_word:
+                continue
+            if search_type not in settings["search_type"]:
+                result_json[search_block_word]={
+                    "search_data":search_block_search_data
+                }
+                for k,v in search_block_search_data.items():
+                    result_search_ids_list_item = result_search_ids_list_item |set(v)
+                    result_search_ids = result_search_ids | set(v)
+                    for v_i in v:
+                        num = int(result_search_ids_count.get(v_i,0))+1
+                        result_search_ids_count[v_i]=num
+            else:
+                result_json[search_block_word]={
+                    "search_data":{
+                        search_type:search_block_search_data.get(search_type,[])
+                    }
+                }
+                result_search_ids_list_item = result_search_ids_list_item |set(v)
+                result_search_ids = result_search_ids | set(search_block_search_data.get(search_type,[]))
+                for v_i in search_block_search_data.get(search_type,[]):
+                    num = int(result_search_ids_count.get(v_i,0))+1
+                    result_search_ids_count[v_i]=num
+            result_search_ids_list.append(result_search_ids_list_item)
+        e = set()
+        f = True
+        for i in result_search_ids_list:
+            print(len(i))
+            if f:
+                e = e | i
+                f = False
+            else:
+                e = e & i
+        result_search_ids = e
+
+        result_search_json = {}
+        result_search_ids_check = []
+        result_search_ids_check_json = {}
+        old_result_search_ids = result_search_ids
+        for result_search_ids_item in result_search_ids:
+            result_search_ids_item_list = result_search_ids_item.split("_")
+            result_search_ids_item_id = result_search_ids_item_list[0]
+            if result_search_ids_item_id not in result_search_ids_check:
+                result_search_ids_check.append(result_search_ids_item_id)
+            if len(result_search_ids_item_list)>1:
+                result_search_ids_item_id_sequence = result_search_ids_item_list[1]
+                result_search_ids_check_json_list = result_search_ids_check_json.get(result_search_ids_item_id,[])
+                if result_search_ids_item_id_sequence not in result_search_ids_check_json_list:
+                    result_search_ids_check_json_list.append(result_search_ids_item_id_sequence)
+                result_search_ids_check_json[result_search_ids_item_id]=result_search_ids_check_json_list
+
+        result_search_ids = result_search_ids_check
+        result_searchs = get_aims(result_search_ids)
+        for result_search in result_searchs:
+            result_search_id = result_search[0]
+            result_search_body = result_search[1]
+
+            result_title = result_search_body.get("title","Title")
+            result_desc = result_search_body.get("desc","Desc")
+            result_type = result_search_body.get("type","block")
+            result_subytpe = result_search_body.get("subtype","block")
+            result_doms = result_search_body.get("doms",[])
+            result_permission = result_search_body.get("permission","private")
+            if result_type in ["user"]:
+                result_title = result_search_body.get("name","暂无昵称")
+                result_desc = result_search_body.get("plus_info",{}).get("角色","")
+
+            # elif result_type in ["product"] to find the owner or store to get score count with one product or just in on card
+            # 搜索商品时，一种是集中搜索词呈现，根据店铺分和商品分综合展示，另一种模式是商铺合集展示
+            sequence_list=[]
+            for dom in result_doms:
+                if dom[0] in result_search_ids_check_json.get(result_search_id,[]):
+                    block_id_sequence = "%s_%s"%(result_search_id,dom[0])
+                    if block_id_sequence in old_result_search_ids:
+                        sequence_list.append(dom)
+            result_search_json[result_search_id]={
+                "title":result_title,
+                "desc":result_desc,
+                "type":result_type,
+                "subtype":result_subytpe,
+                "sequence":sequence_list,
+                "permission":result_permission,
             }
         self.finish({
             "info":"ok",

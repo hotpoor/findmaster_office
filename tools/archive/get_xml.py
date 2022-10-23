@@ -74,7 +74,8 @@ def upload_docx(filename,download_link=""):
 
         p_list = [
             "文件名: %s"%filename,
-            "下载地址: %s"%download_link
+            "下载地址: %s"%download_link,
+            "点击下载: <a target=\"_blank\" href=\"%s?attname=%s\">%s</a>"%(download_link,filename.split("/")[-1],download_link)
         ]
         doc_dd_0 = json.loads(json_conversion1)
         for k,v in doc_dd_0.items():

@@ -18,7 +18,8 @@ def upload_pdf(filename,download_link=""):
     f_path = filename
     p_list = [
         "文件名: %s"%filename,
-        "下载地址: %s"%download_link
+        "下载地址: %s"%download_link,
+        "点击下载: <a target=\"_blank\" href=\"%s?attname=%s\">%s</a>"%(download_link,filename.split("/")[-1],download_link)
     ]
     with open(f_path, 'rb') as f:
         parser = PDFParser(f)

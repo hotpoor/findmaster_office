@@ -270,8 +270,10 @@ application = tornado.web.Application([
     (r"/api/search/add_free_page", findmaster_search.SearchAddFreePageAPIHandler),
     (r"/api/search/add_free", findmaster_search.SearchAddFreeAPIHandler),
     (r"/api/search/add", findmaster_search.SearchAddAPIHandler),
-    (r"/api/search/list", findmaster_search.SearchListAPIHandler),
     (r"/api/search/list_more", findmaster_search.SearchListMoreAPIHandler),
+    (r"/api/search/list_force", findmaster_search.SearchListForceAPIHandler),
+    (r"/api/search/list", findmaster_search.SearchListAPIHandler),
+    
 
     (r"/api/data/ws",data.DataWebSocket),
 

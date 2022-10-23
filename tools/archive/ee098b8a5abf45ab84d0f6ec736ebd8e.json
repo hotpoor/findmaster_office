@@ -1,0 +1,31 @@
+{
+  "folder_name": "其他台账",
+  "block_id": "ee098b8a5abf45ab84d0f6ec736ebd8e",
+  "data": [
+    {
+      "name": "隔爆设施管理台账2022.10.01 -新.xlsx",
+      "path": "ee098b8a5abf45ab84d0f6ec736ebd8e/upload_ready/其他台账/隔爆设施管理台账2022.10.01 -新.xlsx",
+      "md5": "d9c572d6b21ae17dded575e35807b328",
+      "link": "http://office-cdn-1.xialiwei.com/ee098b8a5abf45ab84d0f6ec736ebd8e_s_d9c572d6b21ae17dded575e35807b328",
+      "cdn_type": "public"
+    }
+  ],
+  "tree": [
+    {
+      "root": "upload_ready/其他台账",
+      "dirs": [],
+      "files": [
+        "隔爆设施管理台账2022.10.01 -新.xlsx"
+      ],
+      "files_data": [
+        {
+          "name": "隔爆设施管理台账2022.10.01 -新.xlsx",
+          "path": "ee098b8a5abf45ab84d0f6ec736ebd8e/upload_ready/其他台账/隔爆设施管理台账2022.10.01 -新.xlsx",
+          "md5": "d9c572d6b21ae17dded575e35807b328",
+          "link": "http://office-cdn-1.xialiwei.com/ee098b8a5abf45ab84d0f6ec736ebd8e_s_d9c572d6b21ae17dded575e35807b328",
+          "cdn_type": "public"
+        }
+      ]
+    }
+  ]
+}
