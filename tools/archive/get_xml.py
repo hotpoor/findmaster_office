@@ -1,5 +1,7 @@
 #!/bin/env python
 #coding=utf-8
+import sys
+import os
 import docx
 from docx.shared import Length, Pt, RGBColor
 from lxml import etree
@@ -12,6 +14,8 @@ import requests
 import jieba
 import os
 import subprocess
+
+import qiniu
 
 from setting import settings
 
@@ -47,7 +51,14 @@ def postprocessor1(path, key, value):
     }
     sub +=1
     return key, value
-def upload_docx(filename,download_link=""):
+
+def file_md5(file_path):
+    with open(file_path, 'rb') as fp:
+        data = fp.read()
+    file_md5= hashlib.md5(data).hexdigest()
+    return file_md5
+
+def upload_docx(filename,download_link="",save_block_id=None):
     sub = 0
     if filename.split(".")[-1] in ["docx"]:
         file=docx.Document(filename)
@@ -72,10 +83,44 @@ def upload_docx(filename,download_link=""):
         # with open("xml2.json", "w", encoding="utf-8") as bfile:
         #     bfile.write(json.dumps(json_conversion2, indent=2, ensure_ascii=False)) #ensure_ascii=False可以消除json包含中文的乱码问题
 
+        dest = "./dest"
+        file_docx_to_pdf = filename
+        output = subprocess.check_output([settings["libreoffice"],"--headless","--convert-to","pdf",file_docx_to_pdf,"--outdir",dest])
+        dest_file = "./dest/%s.pdf"%(file_docx_to_pdf.split("/")[-1].split(".docx")[0])
+
+
+        # path_now = "%s/%s/%s"%(block_id,root,file_item)
+        # path_current = "%s/%s"%(root,file_item)
+        # file_md5_str = file_md5(path_current)
+        file_md5_str = file_md5(dest_file)
+
+        # file_item_list = file_item.split(".")
+        qiniu_file_key = "%s_s_%s"%(save_block_id,file_md5_str)
+        file_info = {
+            # "name":file_item,
+            # "path":path_now,
+            "md5":file_md5_str,
+            "link":"http://office-cdn-1.xialiwei.com/%s"%qiniu_file_key,
+            # "cdn_type":"secret",
+            "cdn_type":"public",
+        }
+        # files_list.append(file_info)
+        # files_data.append(file_info)
+        print(file_info)
+        q = qiniu.Auth(settings["QiniuAccessKey"], settings["QiniuSecretKey"])
+        # uptoken = q.upload_token("audio", key, 3600, policy)
+        uptoken = q.upload_token("ofcourse-office-1")
+        # localfile = os.path.join(os.path.dirname(__file__), path_current)
+        # ret, info = qiniu.put_file(uptoken, qiniu_file_key, localfile)
+        ret, info = qiniu.put_file(uptoken, qiniu_file_key, dest_file)
+
+        pdf_download_link = file_info["link"]
+
+
         p_list = [
             "文件名: %s"%filename,
-            "下载地址: %s"%download_link,
-            "点击下载: <a target=\"_blank\" href=\"%s?attname=%s\">%s</a>"%(download_link,filename.split("/")[-1],download_link)
+            "在线访问: <a target=\"_blank\" href=\"%s\">%s</a>"%(pdf_download_link,filename.split("/")[-1].replace(".docx",".pdf")),
+            "下载地址: <a target=\"_blank\" href=\"%s?attname=%s\">%s</a>"%(download_link,filename.split("/")[-1],download_link)
         ]
         doc_dd_0 = json.loads(json_conversion1)
         for k,v in doc_dd_0.items():
@@ -110,7 +155,7 @@ def upload_docx(filename,download_link=""):
                                 p_list.append(p)
         p_list_str = json.dumps(p_list)
         print("文档行数:",len(p_list))
-        url = "https://office.xialiwei.com/api/page/add_free_docx"
+        url = "%s/api/page/add_free_docx"%(settings["host"])
         header = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
         }
@@ -128,7 +173,7 @@ def upload_docx(filename,download_link=""):
         block_id = request_json["block_id"]
         print(block_id)
 
-        url = "https://office.xialiwei.com/api/search/add_free_page"
+        url = "%s/api/search/add_free_page"%(settings["host"])
         header = {
             'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
         }
@@ -144,14 +189,14 @@ def upload_docx(filename,download_link=""):
         request = requests.post(url, headers=header, data=data)
         request_json = json.loads(request.text)
 
-def upload_doc(filename,download_link=""):
+def upload_doc(filename,download_link="",save_block_id=None):
     dest = "./dest"
     file = filename
     output = subprocess.check_output([settings["libreoffice"],"--headless","--convert-to","docx",file,"--outdir",dest])
     print(output)
     dest_file = "./dest/%sx"%(file.split("/")[-1])
     print(dest_file)
-    upload_docx(dest_file,download_link)
+    upload_docx(dest_file,download_link,save_block_id)
 # print("=====")
 
 # a = parseString(body_xml_str)

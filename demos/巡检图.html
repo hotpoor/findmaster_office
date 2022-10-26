@@ -1,0 +1,159 @@
+<script src="/static/js/echarts/echarts.min.js"></script>
+<div>巡检路线图</div>
+<div id="main" style="width:100%;height:500px;"></div>
+<script>
+
+var stations = [ 
+    "4309胶带顺槽水仓处",
+    "4309工作面回风",
+    "4309胶带顺槽二部皮带机头处",
+    "4309胶带顺槽排水处",
+    "4309工作面回风隅角",
+    "4309工作面",
+    "4309轨道顺槽2号超高处",
+    "4309轨道顺槽1号超高处",
+    "4307轨道运输巷卸压施工处",
+    "西翼-700矸石仓顶溜头机电设备处",
+    "西翼-700煤仓顶机电设备处",
+    "4312胶带运输巷机尾机电设备处",
+    "4310胶带运输巷超高处",
+    "4310切眼回风",
+    "4310切眼施工处",
+    "4310胶带顺槽（新）卸压施工处",
+    "4310胶带顺槽（新）皮带机头机电设备处",
+    "4310胶带顺槽回风",
+    "4310胶带顺槽施工处",
+    "4310胶带顺槽机电设备处",
+    "4310胶带顺槽1号超高处",
+    "4310胶带运输巷溜头机电设备处",
+    "4310轨道顺槽联络巷超高处",
+    "4310轨道顺槽施工处",
+    "4310轨道顺槽排水处",
+    "4310轨道串联风",
+    "4306轨道运输巷回风",
+    "4306轨道运输巷排水及施工处"
+]
+stations.reverse()
+
+var stations_time =[
+    "23:56",
+    "0:02",
+    "0:09",
+    "0:16",
+    "0:22",
+    "0:30",
+    "0:38",
+    "0:44",
+    "0:50",
+    "0:59",
+    "1:05",
+    "1:13",
+    "1:20",
+    "1:26",
+    "1:37",
+    "1:45",
+    "1:54",
+    "2:00",
+    "2:08",
+    "2:15",
+    "2:21",
+    "2:28",
+    "2:34",
+    "2:41",
+    "2:47",
+    "2:53",
+    "3:00"
+]
+
+stations_time_load = []
+stations_time_load_str = []
+h_yesterday = true
+for (i=0;i<stations_time.length;i++){
+    stations_time_list = stations_time[i].split(":")
+    h = parseInt(stations_time_list[0])
+    m = parseInt(stations_time_list[1])
+    stations_time_load_str.push(h+":"+m)
+    console.log(h,m)
+    if (h ==0){
+        h_yesterday=false
+    }
+    if (h_yesterday){
+        // t = (h+parseFloat(m/60.0)).toFixed(2)
+        // t = 24-t
+        // t = t*-1
+        d = new Date("2021-6-5 "+h+":"+m)
+        t = d.getTime()
+    }else{
+        d = new Date("2021-6-6 "+h+":"+m)
+        t = d.getTime()
+    }
+    console.log(t)
+    stations_time_load.push(t)
+}
+
+stations_time_load.reverse()
+
+var chartDom = document.getElementById('main');
+var myChart = echarts.init(chartDom);
+var option;
+
+option = {
+  legend: {
+    data: ['站点与巡检时间图']
+  },
+  tooltip: {
+    trigger: 'axis',
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  xAxis: {
+    type: 'time',
+    name:"时间",
+    axisLine: { onZero: false },
+    axisTick: {
+        alignWithLabel: true
+    },
+  },
+  yAxis: {
+    type: 'category',
+    name:"站点",
+    axisLine: { onZero: false },
+    axisLabel: {
+      formatter: '{value}'
+    },
+    boundaryGap: true,
+    data: stations
+  },
+  series: [
+    {
+      name: '站点与检测时间的关系',
+      type: 'line',
+      smooth: true,
+      data: stations_time_load,
+      tooltip: {
+        valueFormatter: value => (new Date(value)).getHours()+":"+(new Date(value)).getMinutes()
+      },
+    },
+    {
+      name: '标记',
+      type: 'text',
+      smooth: true,
+      data: stations_time_load,
+      tooltip: {
+        valueFormatter: value => (new Date(value)).getHours()+":"+(new Date(value)).getMinutes()
+      },
+    }
+  ]
+};
+
+option && myChart.setOption(option);
+
+
+
+
+</script>
+<script src="/static/js/coffeescript.js"></script>

@@ -67,10 +67,10 @@ def file_name_upload(file_dir,block_id):
             download_link = file_info["link"]
             print("======== file:",localfile.split(".")[-1])
             if localfile.split(".")[-1] == "docx":
-                upload_docx(localfile,download_link)
+                upload_docx(localfile,download_link,block_id)
                 print("=========== docx")
             elif localfile.split(".")[-1] == "doc":
-                upload_doc(localfile,download_link)
+                upload_doc(localfile,download_link,block_id)
                 print("=========== doc")
             elif localfile.split(".")[-1] == "pdf":
                 upload_pdf(localfile,download_link)
@@ -86,7 +86,7 @@ def file_name_upload(file_dir,block_id):
 
 def check_dir(dir_item):
     print("check dir_item:",dir_item)
-    url = "https://office.xialiwei.com/api/page/add_free"
+    url = "%s/api/page/add_free"%(settings["host"])
     header = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
     }

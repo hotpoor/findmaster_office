@@ -1,0 +1,139 @@
+<script src="/static/js/echarts/echarts.min.js"></script>
+<div id="main" style="width:100%;height:3800px;"></div>
+<script type="text/javascript">
+    var chartDom = document.getElementById('main');
+    var myChart = echarts.init(chartDom,null,{renderer:'svg'});
+    var option;
+    stations = 表格数据解析数据["stations"];
+    stations.reverse()
+    data_base = 表格数据解析数据["data_base"];
+    stations_time = 表格数据解析数据["date_hours"];
+    data_base_yesterday_date = new Date((new Date(data_base)).getTime()-86400*1000)
+    data_base_yesterday = data_base_yesterday_date.getFullYear()+"-"+(data_base_yesterday_date.getMonth()+1)+"-"+data_base_yesterday_date.getDate()
+    stations_time_yesterday = true
+    for (i=0;i<stations_time.length;i++){
+        if (parseInt(stations_time[0].split(":")[0])<1){
+            stations_time_yesterday = false
+        }
+        if (stations_time_yesterday){
+            stations_time[i]=data_base_yesterday+" "+stations_time[i]
+        }else{
+            stations_time[i]=data_base+" "+stations_time[i]
+        }
+    }
+
+    data_men = 表格数据解析数据["data_men"]
+    test_data = [];
+
+    for (k in data_men) {
+      v = data_men[k];
+      men_data = [];
+      v_first = v["first"];
+      v_first_flag = false;
+      v_col_nums = v["col_nums"];
+      v_col_nums_json = v["col_nums_json"];
+      for (l = 0, len = v_col_nums.length; l < len; l++) {
+        i = v_col_nums[l];
+        ref = v_col_nums_json[i];
+        for (m = 0, len1 = ref.length; m < len1; m++) {
+          j = ref[m];
+          aj = j[0];
+          aj_end = data_base;
+          if (i === v_col_nums[0]) {
+            if ((ref1 = aj.split(":")[0]) === "23") {
+              aj_end = data_base_yesterday;
+            }
+          }
+          v_item = [aj_end + " " + j[0], j[1]];
+          if (!v_first_flag) {
+            v_first_flag = true;
+            men_data.push([aj_end + " " + j[0], ""]);
+          }
+          men_data.push(v_item);
+        }
+      }
+      for (n = 0, len2 = men_data.length; n < len2; n++) {
+        men_data_item = men_data[n];
+        test_data.push(men_data_item);
+      }
+    }
+
+
+    
+
+
+
+
+
+    option = {
+      title: {
+        text: 表格数据解析数据["filename"],
+        subtext: data_base,
+        show: false
+      },
+      grid: {
+        left: '50',
+        right: '20',
+        bottom: '0',
+        top: '0',
+        containLabel: true,
+        show: true,
+        borderWidth: 1
+      },
+      xAxis: {
+        position:"top",
+        type: 'time',
+        data: stations_time,
+        axisLabel: {
+          formatter: "{H}",
+          showMinLabel: true,
+          align: 'center'
+        },
+        axisTick: {
+          lineStyle: {
+            type: 'solid'
+          },
+          inside: true,
+          show: true,
+          length: 4000
+        },
+        axisLine: {
+          onZero: false,
+          show: true
+        },
+        offset: 0,
+        boundaryGap: true,
+        min: data_base_yesterday+' 23:00',
+        max: data_base+' 23:00',
+        splitNumber: 23
+      },
+      yAxis: {
+        offset: 240,
+        axisLine: { onZero: false },
+        axisLabel: {
+          formatter: '{value}',
+          align: 'left',
+          margin: -5
+        },
+        axisTick: {
+          inside: true,
+          lineStyle: {
+            type: 'solid'
+          },
+          length: 1000
+        },
+        type: 'category',
+        data: stations
+      },
+      series: [
+        {
+          type: 'line',
+          name: 'data',
+          data: test_data,
+          symbolSize: 8,
+        }
+      ]
+    };
+
+    option && myChart.setOption(option);
+</script>

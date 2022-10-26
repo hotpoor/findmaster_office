@@ -163,7 +163,7 @@ class SearchAddFreePageAPIHandler(WebRequest):
                 block_search_words_leave_update = block_search_words_old - block_search_words_new
                 block_search_words_leave_old = set(block_search_words_leave.get(search_type,[]))
                 block_search_words_leave_now = block_search_words_leave_update|block_search_words_leave_old
-                print("block_search_words_leave_now",block_search_words_leave_now)
+                # print("block_search_words_leave_now",block_search_words_leave_now)
                 leave_word_ids = []
                 result = conn.query("SELECT * FROM index_search WHERE word in %s",tuple(block_search_words_leave_now))
                 for item in result:
@@ -175,7 +175,7 @@ class SearchAddFreePageAPIHandler(WebRequest):
                     leave_block_id = leave_block[0]
                     leave_block_body = leave_block[1]
                     leave_block_update = False
-                    leave_block_word = leave_block_body.get("word",None)
+                    leave_block_word = leave_block_body.get("word","")
                     leave_block_entities = leave_block_body.get("entities",[])
                     if block_id in leave_block_entities:
                         leave_block_entities.remove(block_id)
@@ -196,7 +196,8 @@ class SearchAddFreePageAPIHandler(WebRequest):
                     leave_block_body["search_data"]=leave_block_search_data
                     if leave_block_update:
                         leave_block_body["updatetime"]=int(time.time())
-                        block_search_words_leave_now.remove(leave_block_word)
+                        if leave_block_word in block_search_words_leave_now:
+                            block_search_words_leave_now.remove(leave_block_word)
                         update_aim(leave_block_id,leave_block_body)
 
                 block_search_words[search_type]=list(block_search_words_new)

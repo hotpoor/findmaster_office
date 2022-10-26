@@ -18,8 +18,8 @@ def upload_pdf(filename,download_link=""):
     f_path = filename
     p_list = [
         "文件名: %s"%filename,
-        "下载地址: %s"%download_link,
-        "点击下载: <a target=\"_blank\" href=\"%s?attname=%s\">%s</a>"%(download_link,filename.split("/")[-1],download_link)
+        "在线访问: <a target=\"_blank\" href=\"%s\">%s</a>"%(download_link,filename.split("/")[-1]),
+        "下载地址: <a target=\"_blank\" href=\"%s?attname=%s\">%s</a>"%(download_link,filename.split("/")[-1],download_link)
     ]
     with open(f_path, 'rb') as f:
         parser = PDFParser(f)
@@ -47,7 +47,7 @@ def upload_pdf(filename,download_link=""):
 
     p_list_str = json.dumps(p_list)
     print("文档行数:",len(p_list))
-    url = "https://office.xialiwei.com/api/page/add_free_pdf"
+    url = "%s/api/page/add_free_pdf"%(settings["host"])
     header = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
     }
@@ -64,7 +64,7 @@ def upload_pdf(filename,download_link=""):
     request_json = json.loads(request.text)
     block_id = request_json["block_id"]
     print(block_id)
-    url = "https://office.xialiwei.com/api/search/add_free_page"
+    url = "%s/api/search/add_free_page"%(settings["host"])
     header = {
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.198 Safari/537.36'
     }
